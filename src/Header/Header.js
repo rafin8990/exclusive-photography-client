@@ -59,16 +59,16 @@ const Header = () => {
                                 }`}
                         >
                             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                                <li className="text-white hover:text-indigo-200">
-                                    <Link >Home</Link>
+                                <li className="text-white hover:text-orange-500">
+                                    <Link to='/'>Home</Link>
                                 </li>
-                                <li className="text-white hover:text-indigo-200">
-                                    <Link >Blog</Link>
+                                <li className="text-white hover:text-orange-500">
+                                    <Link to='/services' >Services</Link>
                                 </li>
-                                <li className="text-white hover:text-indigo-200">
+                                <li className="text-white hover:text-orange-500">
                                     <Link >About US</Link>
                                 </li>
-                                <li className="text-white hover:text-indigo-200">
+                                <li className="text-white hover:text-orange-500">
                                     <Link >Contact US</Link>
                                 </li>
                             </ul>

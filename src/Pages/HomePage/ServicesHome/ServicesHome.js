@@ -24,7 +24,7 @@ const ServicesHome = () => {
                 }
             </div>
             <div className=' flex justify-center mt-10'>
-                <Link><button className='btn bg-orange-500 mt-5'>See More Services</button></Link>
+                <Link to='/services'><button className='btn bg-orange-500 mt-5'>See More Services</button></Link>
             </div>
         </div>
     );

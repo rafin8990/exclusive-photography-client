@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ServiceHomeCart = ({ service }) => {
-    const { name, price, picture, about , _id} = service
-    const names = 'hsdfhjsdfgjhsbdfcjhzgjbzj'
-    const aaa = names.slice(100)
-    console.log(aaa)
+const ServiceCart = ({ service }) => {
+
+    const { name, about, price, picture , _id} = service
     return (
         <div>
             <div className="card card-compact w-96 border border-white shadow-xl">
@@ -15,9 +13,7 @@ const ServiceHomeCart = ({ service }) => {
                     <p className='text-gray-300'>{about.slice(0, 100)}......</p>
                     <div className="flex justify-between items-center">
                         <p className='text-orange-500 text-2xl'>Price: {price}</p>
-                        <Link to={`/services/${_id}`}>
-                            <button className="btn bg-orange-500">View details</button>
-                        </Link>
+                        <Link to={`/services/${_id}`}><button className="btn bg-orange-500">View details</button></Link>
                     </div>
                 </div>
             </div>
@@ -25,4 +21,4 @@ const ServiceHomeCart = ({ service }) => {
     );
 };
 
-export default ServiceHomeCart;
+export default ServiceCart;
