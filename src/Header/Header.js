@@ -13,7 +13,7 @@ const Header = () => {
                         <div className="flex items-center justify-between py-3 md:py-5 md:block">
                             <Link className='flex items-center'>
                                 <img className='mr-3 w-16' src={logo} alt="" />
-                                <h2 className="text-2xl font-bold text-white">Exclusive World</h2>
+                                <h2 className="text-2xl font-bold text-orange-500">Exclusive World</h2>
                             </Link>
                             <div className="md:hidden">
                                 <button
