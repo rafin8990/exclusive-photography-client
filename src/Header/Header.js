@@ -68,9 +68,22 @@ const Header = () => {
                                 <li className="text-white hover:text-orange-500">
                                     <Link to='/services' >Services</Link>
                                 </li>
-                                <li className="text-white hover:text-orange-500">
-                                    <Link >My Reviews</Link>
-                                </li>
+                                {
+                                    user?.uid? 
+                                    <div className='flex'>
+                                    <li className="text-white hover:text-orange-500 mr-5">
+                                        <Link >My Reviews</Link>
+                                    </li>
+                                    <li className="text-white hover:text-orange-500">
+                                        <Link>Add Service</Link>
+                                    </li>
+                                </div>
+                                    :
+                                    <>
+                                    </>
+
+
+                                }
                                 <li className="text-white hover:text-orange-500">
                                     <Link >Blog</Link>
                                 </li>
@@ -78,24 +91,24 @@ const Header = () => {
 
                             <div>
                                 {
-                                    user?.uid? 
-                                    <button className='btn md:hidden bg-orange-500' onClick={logOut}>LogOut</button>
-                                    
-                                    :
-                                    <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                                <Link to='/login'
+                                    user?.uid ?
+                                        <button className='btn md:hidden bg-orange-500' onClick={logOut}>LogOut</button>
 
-                                    className="inline-block w-full px-4 py-2 md:hidden text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
-                                >
-                                    Sign in
-                                </Link>
-                                <Link to='/register'
+                                        :
+                                        <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+                                            <Link to='/login'
 
-                                    className="inline-block w-full  px-4 md:hidden py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
-                                >
-                                    Sign up
-                                </Link>
-                            </div>
+                                                className="inline-block w-full px-4 py-2 md:hidden text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+                                            >
+                                                Sign in
+                                            </Link>
+                                            <Link to='/register'
+
+                                                className="inline-block w-full  px-4 md:hidden py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                                            >
+                                                Sign up
+                                            </Link>
+                                        </div>
 
                                 }
                             </div>
