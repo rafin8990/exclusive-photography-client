@@ -72,7 +72,7 @@ const Header = () => {
                                     user?.uid? 
                                     <div className='flex'>
                                     <li className="text-white hover:text-orange-500 mr-5">
-                                        <Link >My Reviews</Link>
+                                        <Link to='/myreview'>My Reviews</Link>
                                     </li>
                                     <li className="text-white hover:text-orange-500">
                                         <Link>Add Service</Link>
@@ -85,7 +85,7 @@ const Header = () => {
 
                                 }
                                 <li className="text-white hover:text-orange-500">
-                                    <Link >Blog</Link>
+                                    <Link to='/blog'>Blog</Link>
                                 </li>
                             </ul>
 

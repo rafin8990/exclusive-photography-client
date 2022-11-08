@@ -123,14 +123,14 @@ const ServiceDetails = () => {
                                 </div>
                                 :
                                 <div className='flex justify-center mt-10'>
-                                    <Link to='/login' className='text-white text-4xl' >Please login for <span className='text-orange-500'> Add a Review</span></Link>
+                                    <Link to='/login' className='text-white text-4xl' >Please login for <span className='text-orange-500 btn hover:bg-orange-500 hover:text-gray-300'> Add a Review</span></Link>
                                 </div>
                         }
                     </div>
 
                     {/* review details  */}
 
-                    <div className=' m-5'>
+                    <div className=' m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                         {
                             reviewsData?.map(review => <ReviewDetails
                                 key={review?._id}
