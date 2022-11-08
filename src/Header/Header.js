@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import logo from '../Assets/logo.png'
+import { AuthContext } from '../Pages/Context/AuthProvider/AuthProvider';
 
 const Header = () => {
     const [navbar, setNavbar] = useState(false);
+    const { logOut, user } = useContext(AuthContext);
+
     return (
         <div>
             <nav className="w-full bg-black shadow">
@@ -66,43 +69,60 @@ const Header = () => {
                                     <Link to='/services' >Services</Link>
                                 </li>
                                 <li className="text-white hover:text-orange-500">
-                                    <Link >About US</Link>
+                                    <Link >My Reviews</Link>
                                 </li>
                                 <li className="text-white hover:text-orange-500">
-                                    <Link >Contact US</Link>
+                                    <Link >Blog</Link>
                                 </li>
                             </ul>
 
-                            <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                                <Link
+                            <div>
+                                {
+                                    user?.uid? 
+                                    <button className='btn md:hidden bg-orange-500' onClick={logOut}>LogOut</button>
+                                    
+                                    :
+                                    <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+                                <Link to='/login'
 
                                     className="inline-block w-full px-4 py-2 md:hidden text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
                                 >
                                     Sign in
                                 </Link>
-                                <Link
+                                <Link to='/register'
 
                                     className="inline-block w-full  px-4 md:hidden py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
                                 >
                                     Sign up
                                 </Link>
                             </div>
+
+                                }
+                            </div>
                         </div>
                     </div>
-                    <div className="hidden space-x-2 md:inline-block">
-                        <Link
+                    <div>
+                        {
+                            user?.uid ?
+                                <button className='btn bg-orange-500 hidden md:block' onClick={logOut}>LogOut</button>
+                                :
+                                <div className="hidden space-x-2 md:inline-block">
+                                    <Link to='/login'
 
-                            className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
-                        >
-                            Sign in
-                        </Link>
-                        <Link
+                                        className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+                                    >
+                                        Sign in
+                                    </Link>
+                                    <Link to='/register'
 
-                            className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
-                        >
-                            Sign up
-                        </Link>
+                                        className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                                    >
+                                        Sign up
+                                    </Link>
+                                </div>
+                        }
                     </div>
+
                 </div>
             </nav>
         </div>

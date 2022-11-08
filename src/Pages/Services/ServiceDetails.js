@@ -1,8 +1,10 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 
 const ServiceDetails = () => {
+    const [reviews, setReview] = useState({})
+
     const serviceDetails = useLoaderData()
     const { name, about, price, picture } = serviceDetails
     return (
@@ -42,7 +44,27 @@ const ServiceDetails = () => {
                 </div>
             </div>
             {/* review section  */}
-            <div></div>
+            <div>
+                <div>
+                    <Link to='/login' className='text-white' >Please login for <span className='text-orange-500'> Add a Review</span></Link>
+
+                    <form>
+                        <div>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="text" />
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+
+                </div>
+            </div>
         </div>
     );
 };
