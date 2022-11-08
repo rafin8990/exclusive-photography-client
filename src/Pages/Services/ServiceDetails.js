@@ -1,18 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
+import ReviewDetails from './ReviewDetails';
 
 const ServiceDetails = () => {
     const serviceDetails = useLoaderData()
     const { name, about, price, picture, _id } = serviceDetails
     const { user } = useContext(AuthContext)
-
+    const [reviewsData, setReviewsData] = useState([])
     const [reviews, setReviews] = useState({})
+    const [data, setData]=useState(false)
     console.log(reviews)
 
-    
+    // get review data from server 
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews/${_id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setReviewsData(data)
+            })
+    }, [_id, data])
 
+    // post data to mongodb 
     const handleAddReviewToDB = event => {
         event.preventDefault()
         fetch(`http://localhost:5000/reviews/${_id}`, {
@@ -27,11 +38,13 @@ const ServiceDetails = () => {
                 if (data.acknowledged) {
                     alert('review added usccesfully')
                     event.target.reset();
+                    setData(true)
+
                 }
             });
     }
 
-
+    // input blur 
     const handleInputBlur = event => {
         const value = event.target.value;
         const field = event.target.name;
@@ -41,7 +54,8 @@ const ServiceDetails = () => {
         setReviews(newReview)
     }
 
-    
+
+
     return (
         <div>
             {/* service details  */}
@@ -78,7 +92,11 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </div>
+
+
             {/* review section  */}
+
+
             <section>
                 <div>
                     <div>
@@ -113,9 +131,14 @@ const ServiceDetails = () => {
                         }
                     </div>
 
-                    <div>
-                        {
+                    {/* review details  */}
 
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 m-5'>
+                        {
+                            reviewsData?.map(review => <ReviewDetails
+                                key={review?._id}
+                                reviews={review}
+                            ></ReviewDetails>)
                         }
                     </div>
                 </div>
