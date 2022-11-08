@@ -9,13 +9,12 @@ const ServiceDetails = () => {
     const { name, about, price, picture, _id } = serviceDetails
     const { user } = useContext(AuthContext)
     const [reviewsData, setReviewsData] = useState([])
-    const [reviews, setReviews] = useState({})
-    const [data, setData]=useState(false)
-    console.log(reviews)
+   
+    const [data, setData] = useState(false)
 
     // get review data from server 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${_id}`)
+        fetch(`http://localhost:5000/reviews/${_id}?id=${_id}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -26,12 +25,24 @@ const ServiceDetails = () => {
     // post data to mongodb 
     const handleAddReviewToDB = event => {
         event.preventDefault()
+        const form = event.target
+        const name = form.name.value
+        const email = user?.email || 'unregistered'
+        const review = form.review.value
+        const photoURL=user?.photoURL
+        const data = {
+            name: name,
+            email: email,
+            review: review,
+            id: _id,
+            photoURL:photoURL
+        }
         fetch(`http://localhost:5000/reviews/${_id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(reviews)
+            body: JSON.stringify(data)
         })
             .then(res => res.json())
             .then(data => {
@@ -39,23 +50,9 @@ const ServiceDetails = () => {
                     alert('review added usccesfully')
                     event.target.reset();
                     setData(true)
-
                 }
             });
     }
-
-    // input blur 
-    const handleInputBlur = event => {
-        const value = event.target.value;
-        const field = event.target.name;
-        console.log(event.target);
-        const newReview = { ...reviews }
-        newReview[field] = value;
-        setReviews(newReview)
-    }
-
-
-
     return (
         <div>
             {/* service details  */}
@@ -110,13 +107,13 @@ const ServiceDetails = () => {
                                                 <label className="label">
                                                     <span className="label-text text-gray-300"></span>
                                                 </label>
-                                                <input onBlur={handleInputBlur} type="text" placeholder="Your Name" name='Name' className="input input-bordered w-full text-2xl" required />
+                                                <input type="text" placeholder="Your Name" name='name' className="input input-bordered w-full text-2xl" required />
                                             </div>
-                                            <div >
+                                            <div>
                                                 <label className="label">
                                                     <span className="label-text text-gray-300"></span>
                                                 </label>
-                                                <textarea onBlur={handleInputBlur} name='review' className="textarea text-2xl w-full" placeholder="text here to review"></textarea>
+                                                <textarea name='review' className="textarea text-2xl w-full" placeholder="text here to review"></textarea>
                                             </div>
                                             <div className="form-control mt-6">
                                                 <button type='submit' className="btn bg-orange-500">Add Review</button>
@@ -133,7 +130,7 @@ const ServiceDetails = () => {
 
                     {/* review details  */}
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 m-5'>
+                    <div className=' m-5'>
                         {
                             reviewsData?.map(review => <ReviewDetails
                                 key={review?._id}
