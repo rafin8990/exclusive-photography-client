@@ -2,6 +2,7 @@ import React from 'react';
 import profilepicture from '../../Assets/blank-profile-picture.webp'
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const MyReviewDetails = ({ reviewdb,handleDelete }) => {
     const { name, review, photoURL, _id, serviceName } = reviewdb
@@ -37,6 +38,7 @@ const MyReviewDetails = ({ reviewdb,handleDelete }) => {
                 <div className='flex mt-10'>
                     <div className='mr-5'>
                         <button onClick={()=>handleDelete(_id)} className='btn bg-orange-500'>Delete Review</button>
+                        <ToastContainer />
                     </div>
                     <div>
                         <Link to={`/myreview/${_id}`}><button className='btn bg-orange-500'> Edit Review</button></Link>

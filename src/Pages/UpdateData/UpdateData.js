@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 
+
 const UpdateData = () => {
     const updateData = useLoaderData();
     const { user } = useContext(AuthContext)

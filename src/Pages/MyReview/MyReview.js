@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import image from '../../Assets/br-1.png'
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 import MyReviewDetails from './MyReviewDetails';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const MyReview = () => {
     const { user } = useContext(AuthContext)
     const [reviews, setReviews] = useState([])
-    
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/myreview?email=${user?.email}`)
@@ -26,9 +29,9 @@ const MyReview = () => {
                 .then(data => {
                     console.log(data)
                     if (data.deletedCount > 0) {
-                        alert('Deleted successfully')
+                        toast("Deleted Successfully!")
                         const remaining = reviews.filter(odr => odr?._id !== id)
-                       setReviews(remaining);
+                        setReviews(remaining);
                     }
                 })
 
@@ -49,14 +52,22 @@ const MyReview = () => {
                     </div>
                 </div>
             </div>
-            <div className='mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 m-10'>
+            <div>
                 {
-                    reviews?.map(review => <MyReviewDetails
-                        key={review?._id}
-                        reviewdb={review}
-                        handleDelete={handleDelete}
-                    ></MyReviewDetails>)
+                    reviews.length === 0 ?
+                        <h1 className='text-4xl flex justify-center items-center text-orange-500'>No Review were added ...Please add a review .</h1>
+                        :
+                        <div className='mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 m-10'>
+                            {
+                                reviews?.map(review => <MyReviewDetails
+                                    key={review?._id}
+                                    reviewdb={review}
+                                    handleDelete={handleDelete}
+                                ></MyReviewDetails>)
+                            }
+                        </div>
                 }
+
             </div>
         </div>
     );

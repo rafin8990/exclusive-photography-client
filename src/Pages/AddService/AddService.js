@@ -1,5 +1,7 @@
 import React from 'react';
 import image from '../../Assets/br-1.png'
+import {  toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddService = () => {
 
@@ -27,7 +29,7 @@ const AddService = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    alert('Service added usccesfully')
+                    toast("Service Added Successfully!")
                     event.target.reset()
                 }
             });
@@ -77,6 +79,7 @@ const AddService = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <button type='submit' className="btn bg-orange-500">Add service</button>
+                                <ToastContainer />
                             </div>
                         </form>
                     </div>
