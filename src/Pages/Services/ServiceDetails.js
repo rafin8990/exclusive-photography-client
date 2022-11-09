@@ -3,8 +3,10 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 import ReviewDetails from './ReviewDetails';
+import useTitle from '../../Hooks/useTitle';
 
 const ServiceDetails = () => {
+    useTitle('Service Details')
     const serviceDetails = useLoaderData()
     const { name, about, price, picture, _id } = serviceDetails
     const { user } = useContext(AuthContext)

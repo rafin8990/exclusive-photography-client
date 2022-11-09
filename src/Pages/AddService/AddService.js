@@ -2,9 +2,10 @@ import React from 'react';
 import image from '../../Assets/br-1.png'
 import {  toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTitle from '../../Hooks/useTitle';
 
 const AddService = () => {
-
+    useTitle('Add Service')
     const handleAddServiceToDB = event => {
         event.preventDefault()
         const form = event.target;

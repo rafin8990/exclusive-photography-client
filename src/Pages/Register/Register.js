@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import register from '../../Assets/register.png'
+import useTitle from '../../Hooks/useTitle';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 
 const Register = () => {
+    useTitle('Register')
 
     const {createUser, googleSignIn}=useContext(AuthContext);
 

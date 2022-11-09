@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ServiceCart from './ServiceCart';
 import image from '../../Assets/br-1.png'
+import useTitle from '../../Hooks/useTitle';
 
 const Services = () => {
+    useTitle('Service')
     const [services, setServices]=useState([]);
     useEffect(()=>{
         fetch('http://localhost:5000/services')
