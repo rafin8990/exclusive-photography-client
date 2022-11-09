@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login1 from '../../Assets/login.svg'
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const {login,googleSignIn}=useContext(AuthContext);
+
+    const location=useLocation()
+    const nevigate=useNavigate()
+    const from=location.state?.from?.pathname || '/';
 
     const handleLogin=(event)=>{
         event.preventDefault()
@@ -16,6 +20,7 @@ const Login = () => {
         .then(result=>{
             const user= result.user;
             console.log(user)
+            nevigate(from,{replace:true})
             form.reset();
 
         })
@@ -27,6 +32,7 @@ const Login = () => {
         .then(result=>{
             const user=result.user;
             console.log(user)
+            nevigate(from,{replace:true})
         })
         .catch(error=>console.error(error))
     }

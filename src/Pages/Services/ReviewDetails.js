@@ -2,7 +2,7 @@ import React from 'react';
 import profilepicture from '../../Assets/blank-profile-picture.webp'
 import { FaStar } from "react-icons/fa";
 
-const ReviewDetails = ({ reviews }) => {
+const ReviewDetails = ({ reviews, serviceName }) => {
     const { name, review, photoURL } = reviews;
 
 
@@ -20,6 +20,7 @@ const ReviewDetails = ({ reviews }) => {
                     </div>
                 </div>
                 <div className='px-5 pb-5 mt-5'>
+                    <p className='text-gray-300'>Service Name: {serviceName}</p>
                     <p className='flex items-center text-gray-300'>
                         Ratings:
                         <FaStar className='text-orange-500'></FaStar>
@@ -31,6 +32,7 @@ const ReviewDetails = ({ reviews }) => {
                     <p className='text-gray-300'>
                         Quality: Excellent
                     </p>
+                    
                 </div>
             </div>
         </div>

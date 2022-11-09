@@ -25,17 +25,19 @@ const ServiceDetails = () => {
     // post data to mongodb 
     const handleAddReviewToDB = event => {
         event.preventDefault()
-        const form = event.target
-        const name = form.name.value
-        const email = user?.email || 'unregistered'
-        const review = form.review.value
-        const photoURL=user?.photoURL
+        const form = event.target;
+        const name = form.name.value;
+        const email = user?.email || 'unregistered';
+        const review = form.review.value;
+        const photoURL=user?.photoURL;
+        const serviceName=serviceDetails?.name
         const data = {
             name: name,
             email: email,
             review: review,
             id: _id,
-            photoURL:photoURL
+            photoURL:photoURL,
+            serviceName: serviceName
         }
         fetch(`http://localhost:5000/reviews/${_id}`, {
             method: 'POST',
@@ -127,18 +129,21 @@ const ServiceDetails = () => {
                                 </div>
                         }
                     </div>
+                </div>
+            </section>
 
-                    {/* review details  */}
+            <section>
+                {/* review details  */}
 
-                    <div className=' m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+                <div className=' m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                         {
                             reviewsData?.map(review => <ReviewDetails
                                 key={review?._id}
                                 reviews={review}
+                                serviceName={name}
                             ></ReviewDetails>)
                         }
                     </div>
-                </div>
             </section>
 
         </div>
