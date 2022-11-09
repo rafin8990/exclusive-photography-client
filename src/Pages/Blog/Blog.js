@@ -40,7 +40,7 @@ const Blog = () => {
                         <li>User sign-in using username and password or google/facebook.</li>
                         <li>Authentication server verifies the credentials and issues a jwt signed using either a secret salt or a private key.</li>
                         <li>User's Client uses the JWT to access protected resources by passing the JWT in HTTP Authorization header.</li>
-                        <li>Resource server then verifies the authenticity of the token using the secret salt/ public key.</li>
+                        <li>Resource server then verifies the authenticity of the token using the secret salt public key.</li>
                     </p>
                 </div>
                 <div className=' border border-gray-500 bg-gray-800 rounded-lg ml-3 mr-3 mt-10 shadow-sm'>
