@@ -39,7 +39,7 @@ const MyReviewDetails = ({ reviewdb,handleDelete }) => {
                         <button onClick={()=>handleDelete(_id)} className='btn bg-orange-500'>Delete Review</button>
                     </div>
                     <div>
-                        <Link to={`/myreview/${_id}`}><button className='btn bg-orange-500'> Update Review</button></Link>
+                        <Link to={`/myreview/${_id}`}><button className='btn bg-orange-500'> Edit Review</button></Link>
                     </div>
                 </div>
             </div>

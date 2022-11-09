@@ -70,12 +70,12 @@ const Header = () => {
                                 </li>
                                 {
                                     user?.uid? 
-                                    <div className='flex'>
-                                    <li className="text-white hover:text-orange-500 mr-5">
+                                    <div className='md:flex'>
+                                    <li className="text-white hover:text-orange-500 mt-5 md:mt-0 mr-5">
                                         <Link to='/myreview'>My Reviews</Link>
                                     </li>
                                     <li className="text-white hover:text-orange-500">
-                                        <Link>Add Service</Link>
+                                        <Link to='/addservice'>Add Service</Link>
                                     </li>
                                 </div>
                                     :
