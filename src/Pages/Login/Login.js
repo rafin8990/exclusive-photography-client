@@ -6,37 +6,70 @@ import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
     useTitle('login')
-    const {login,googleSignIn}=useContext(AuthContext);
+    const { login, googleSignIn } = useContext(AuthContext);
 
-    const location=useLocation()
-    const nevigate=useNavigate()
-    const from=location.state?.from?.pathname || '/';
+    const location = useLocation()
+    const nevigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
 
-    const handleLogin=(event)=>{
+    const handleLogin = (event) => {
         event.preventDefault()
-        const form=event.target;
+        const form = event.target;
         const email = form.email.value;
-        const password= form.password.value;
+        const password = form.password.value;
         console.log(email, password);
-        login(email,password)
-        .then(result=>{
-            const user= result.user;
-            console.log(user)
-            nevigate(from,{replace:true})
-            form.reset();
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
 
-        })
-        .catch(error=>console.error(error));
+                form.reset();
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data.token)
+                        localStorage.setItem('token', data.token)
+                        nevigate(from, { replace: true })
+                    })
+            })
+            .catch(error => {
+                console.error(error)
+            });
 
     }
-    const handleGoogleSignIn=()=>{
+    const handleGoogleSignIn = () => {
         googleSignIn()
-        .then(result=>{
-            const user=result.user;
-            console.log(user)
-            nevigate(from,{replace:true})
-        })
-        .catch(error=>console.error(error))
+            .then(result => {
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data.token)
+                        localStorage.setItem('token', data.token)
+                        nevigate(from, { replace: true })
+                    })
+            })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -52,7 +85,7 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text text-gray-300">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" name='email' className="input input-bordered"  required/>
+                                <input type="email" placeholder="email" name='email' className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">

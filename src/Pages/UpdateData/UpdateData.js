@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { useLoaderData } from 'react-router-dom';
 import useTitle from '../../Hooks/useTitle';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
@@ -9,7 +9,7 @@ const UpdateData = () => {
     const updateData = useLoaderData();
     const { user } = useContext(AuthContext)
     const { _id } = updateData
-    const [data, setData] = useState({})
+    
     // update review 
     const handleUpdateData = (event) => {
         event.preventDefault()
@@ -24,19 +24,18 @@ const UpdateData = () => {
             review: review,
             photoURL: photoURL
         }
-        setData(newData)
+        
         fetch(`http://localhost:5000/myreview/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(newData)
         })
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount) {
                     alert('Updated successfully')
-                    setData(data)
                     form.reset()
                 }
 

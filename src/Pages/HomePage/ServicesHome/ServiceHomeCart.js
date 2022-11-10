@@ -5,9 +5,6 @@ import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceHomeCart = ({ service }) => {
     const { name, price, picture, about, _id } = service
-    const names = 'hsdfhjsdfgjhsbdfcjhzgjbzj'
-    const aaa = names.slice(100)
-    console.log(aaa)
     return (
         <div>
             <div className="card card-compact w-96 border border-white shadow-xl">

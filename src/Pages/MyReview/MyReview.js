@@ -9,15 +9,27 @@ import useTitle from '../../Hooks/useTitle';
 
 const MyReview = () => {
     useTitle('MyReview')
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const [reviews, setReviews] = useState([])
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myreview?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [user?.email])
+        fetch(`http://localhost:5000/myreview?email=${user?.email}`,{
+                headers: {
+                    authorization:`bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut()
+                }
+                return res.json()
+            })
+            .then(data => {
+                // console.log(data)
+                setReviews(data)
+            })
+    }, [user?.email , logOut])
 
     // delete review 
 

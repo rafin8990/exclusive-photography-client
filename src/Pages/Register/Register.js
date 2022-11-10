@@ -58,13 +58,14 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text text-gray-300">Password</span>
                                 </label>
-                                <input type="text" placeholder="password" name='password' className="input input-bordered" />
+                                <input type="password" placeholder="password" name='password' className="input input-bordered" />
                                 <label className="">
                                     <p className='text-gray-300'>Already Have an account? <Link to='/register' className='text-orange-500'>Please Login</Link></p>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button type='submit' className="btn bg-orange-500">Login</button>
+                                <button type='submit' className="btn bg-orange-500">Sign Up</button>
+                               
                                 <button onClick={handleGoogle} type='submit' className="btn btn-primary mt-5"> SignIn WIth Google</button>
                             </div>
                         </form>
