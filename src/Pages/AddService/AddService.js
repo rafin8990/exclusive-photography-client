@@ -13,12 +13,13 @@ const AddService = () => {
         const picture=form.picture.value;
         const about=form.about.value;
         const price=form.price.value;
+        const time=new Date()
         const data = {
             name: name,
             picture:picture,
             about:about,
-            price:price
-            
+            price:price,
+            time:time
         }
         fetch('https://exclusive-photography-server.vercel.app/reviews', {
             method: 'POST',

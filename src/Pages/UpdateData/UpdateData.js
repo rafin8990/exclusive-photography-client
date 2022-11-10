@@ -15,6 +15,8 @@ const UpdateData = () => {
     // update review 
     const handleUpdateData = (event) => {
         event.preventDefault()
+        const timestamp = Date.now()
+        console.log(timestamp)
         const form = event.target
         const name = form.name.value
         const email = user?.email || 'unregistered'
@@ -25,6 +27,7 @@ const UpdateData = () => {
             email: email,
             review: review,
             photoURL: photoURL
+           
         }
         
         fetch(`https://exclusive-photography-server.vercel.app/myreview/${_id}`, {
@@ -43,6 +46,8 @@ const UpdateData = () => {
 
             })
     };
+
+   
     return (
         <div>
             <div className='flex justify-center mt-5'>
@@ -61,6 +66,7 @@ const UpdateData = () => {
                     </div>
                     <div className="form-control mt-6">
                         <button type='submit' className="btn bg-orange-500">Update Review</button>
+                        
                     </div>
                 </form>
             </div>

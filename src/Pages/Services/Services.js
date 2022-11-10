@@ -27,7 +27,7 @@ const Services = () => {
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:p-20'>
                 {
-                    services.map(service=><ServiceCart
+                    services && services.sort((a,b)=>a.time>b.time ? -1 : 1).map(service=><ServiceCart
                     key={service?._id}
                     service={service}
                     ></ServiceCart>)

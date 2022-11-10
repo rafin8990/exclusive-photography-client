@@ -11,7 +11,7 @@ const ServiceDetails = () => {
     const { name, about, price, picture, _id } = serviceDetails
     const { user } = useContext(AuthContext)
     const [reviewsData, setReviewsData] = useState([])
-   
+
     const [data, setData] = useState(false)
 
     // get review data from server 
@@ -29,17 +29,19 @@ const ServiceDetails = () => {
         event.preventDefault()
         const form = event.target;
         const name = form.name.value;
+        const time= new Date();
         const email = user?.email || 'unregistered';
         const review = form.review.value;
-        const photoURL=user?.photoURL;
-        const serviceName=serviceDetails?.name
+        const photoURL = user?.photoURL;
+        const serviceName = serviceDetails?.name
         const data = {
             name: name,
             email: email,
             review: review,
             id: _id,
-            photoURL:photoURL,
-            serviceName: serviceName
+            photoURL: photoURL,
+            serviceName: serviceName,
+            time: time
         }
         fetch(`https://exclusive-photography-server.vercel.app/reviews/${_id}`, {
             method: 'POST',
@@ -138,14 +140,14 @@ const ServiceDetails = () => {
                 {/* review details  */}
 
                 <div className=' m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                        {
-                            reviewsData?.map(review => <ReviewDetails
-                                key={review?._id}
-                                reviews={review}
-                                serviceName={name}
-                            ></ReviewDetails>)
-                        }
-                    </div>
+                    {
+                        reviewsData && reviewsData.sort((a,b)=>a.time > b.time ?-1:1).map(review => <ReviewDetails
+                            key={review?._id}
+                            reviews={review}
+                            serviceName={name}
+                        ></ReviewDetails>)
+                    }
+                </div>
             </section>
 
         </div>
