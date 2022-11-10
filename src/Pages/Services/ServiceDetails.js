@@ -16,7 +16,7 @@ const ServiceDetails = () => {
 
     // get review data from server 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${_id}?id=${_id}`)
+        fetch(`https://exclusive-photography-server.vercel.app/reviews/${_id}?id=${_id}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -41,7 +41,7 @@ const ServiceDetails = () => {
             photoURL:photoURL,
             serviceName: serviceName
         }
-        fetch(`http://localhost:5000/reviews/${_id}`, {
+        fetch(`https://exclusive-photography-server.vercel.app/reviews/${_id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

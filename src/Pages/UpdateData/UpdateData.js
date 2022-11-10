@@ -2,6 +2,8 @@ import React, { useContext} from 'react';
 import { useLoaderData } from 'react-router-dom';
 import useTitle from '../../Hooks/useTitle';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const UpdateData = () => {
@@ -25,7 +27,7 @@ const UpdateData = () => {
             photoURL: photoURL
         }
         
-        fetch(`http://localhost:5000/myreview/${_id}`, {
+        fetch(`https://exclusive-photography-server.vercel.app/myreview/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -35,7 +37,7 @@ const UpdateData = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount) {
-                    alert('Updated successfully')
+                    toast('Updated successfully!!!')
                     form.reset()
                 }
 
